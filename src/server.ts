@@ -11,6 +11,7 @@ async function connectToDB() {
   try {
     await prisma.$connect();
     console.log("Db connected");
+  
   } catch (error) {
     console.error("❌ Error connecting to DB:", error);
     process.exit(1);
