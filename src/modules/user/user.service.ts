@@ -23,7 +23,7 @@ const getAllFromDb = async () => {
       updatedAt: true,
       role: true,
       status: true,
-      posts:true
+      post:true
     },
   });
   return result;
