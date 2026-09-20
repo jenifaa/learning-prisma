@@ -27,7 +27,31 @@ const getAllFromDb = async () => {
   return result;
 };
 
+const getSingleFromDb = async (id: number) => {
+  const result = await prisma.post.findUnique({
+    where: {
+      id,
+    },
+    include: {
+      author: {
+        select: {
+          id: true,
+          name: true,
+          email: true,
+          phone: true,
+          picture: true,
+        },
+      },
+    },
+  });
+
+  return result;
+};
+
+
+
 export const PostService = {
   createPost,
   getAllFromDb,
+  getSingleFromDb,
 };

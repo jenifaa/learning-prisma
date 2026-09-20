@@ -11,6 +11,47 @@ const createPost = async (req: Request, res: Response) => {
     console.log(error)
   }
 };
+const getAllPosts = async (req: Request, res: Response) => {
+  try {
+    const result = await PostService.getAllFromDb();
+
+    res.status(200).json({
+      success: true,
+      message: "Posts retrieved successfully",
+      data: result,
+    });
+  } catch (error) {
+    console.log(error);
+
+    res.status(500).json({
+      success: false,
+      message: "Failed to retrieve posts",
+    });
+  }
+};
+
+const getSinglePost = async (req: Request, res: Response) => {
+  const { id } = req.params;
+
+  const result = await PostService.getSingleFromDb(Number(id));
+
+  if (!result) {
+    return res.status(404).json({
+      success: false,
+      message: "Post not found",
+    });
+  }
+
+  res.status(200).json({
+    success: true,
+    message: "Post retrieved successfully",
+    data: result,
+  });
+};
+
+
 export const PostControllers ={
-    createPost
+    createPost,
+    getAllPosts,
+    getSinglePost
 }
