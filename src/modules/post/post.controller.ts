@@ -50,8 +50,28 @@ const getSinglePost = async (req: Request, res: Response) => {
 };
 
 
+const deletePost = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+
+    const result = await PostService.deletePostFromDb(Number(id));
+
+    res.status(200).json({
+      success: true,
+      message: "Post deleted successfully",
+      data: result,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Failed to delete post",
+      error,
+    });
+  }
+};
 export const PostControllers ={
     createPost,
     getAllPosts,
-    getSinglePost
+    getSinglePost,
+    deletePost
 }

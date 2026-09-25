@@ -48,10 +48,19 @@ const getSingleFromDb = async (id: number) => {
   return result;
 };
 
+const deletePostFromDb = async (id: number): Promise<Post> => {
+  const result = await prisma.post.delete({
+    where: {
+      id,
+    },
+  });
 
+  return result;
+};
 
 export const PostService = {
   createPost,
   getAllFromDb,
   getSingleFromDb,
+  deletePostFromDb
 };
