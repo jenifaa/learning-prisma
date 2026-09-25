@@ -57,10 +57,24 @@ const deletePostFromDb = async (id: number): Promise<Post> => {
 
   return result;
 };
+const updatePostFromDb = async (
+  id: number,
+  payload: Prisma.PostUpdateInput
+): Promise<Post> => {
+  const result = await prisma.post.update({
+    where: {
+      id,
+    },
+    data: payload,
+  });
 
+  return result;
+};
 export const PostService = {
   createPost,
   getAllFromDb,
   getSingleFromDb,
-  deletePostFromDb
+  deletePostFromDb,
+  updatePostFromDb
 };
+
