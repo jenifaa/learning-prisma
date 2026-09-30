@@ -29,7 +29,22 @@ const getAllFromDb = async () => {
   return result;
 };
 
+const updateUser = async (
+  id: number,
+  payload: Prisma.UserUpdateInput
+): Promise<User> => {
+  const updatedUser = await prisma.user.update({
+    where: {
+      id,
+    },
+    data: payload,
+  });
+
+  return updatedUser;
+};
+
 export const UserService = {
   createUser,
   getAllFromDb,
+  updateUser
 };
